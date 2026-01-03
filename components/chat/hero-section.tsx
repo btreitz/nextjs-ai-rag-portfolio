@@ -6,7 +6,13 @@ import { TypewriterText } from "@/components/ui/typewriter-text";
 const INTRO_TEXT =
 	"Software developer based in Berlin. Ask me about my experience with React, TypeScript, my home lab, or personal projects.";
 
-const SUGGESTIONS = ["Your experience", "Your projects", "Tech stack", "Contact info", "Current work"] as const;
+const SUGGESTIONS = [
+	{ label: "Your experience", question: "What's your professional background and work experience?" },
+	{ label: "Your projects", question: "What side projects or personal projects have you built?" },
+	{ label: "Tech stack", question: "What technologies and tools do you work with?" },
+	{ label: "Current work", question: "What are you currently working on?" },
+	{ label: "Contact info", question: "How can I get in touch with you?" }
+];
 
 interface HeroSectionProps {
 	onSuggestionClick: (suggestion: string) => void;
@@ -39,7 +45,16 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6, delay: 0.15 }}
 				>
-					Hi, I&apos;m Bastian 👋
+					Hi, I&apos;m Bastian{" "}
+					<motion.span
+						className="inline-block origin-[70%_70%]"
+						whileHover={{
+							rotate: [0, 14, -8, 14, -4, 10, 0],
+							transition: { duration: 0.6 }
+						}}
+					>
+						👋
+					</motion.span>
 				</motion.h1>
 				<p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 max-w-md text-center leading-relaxed">
 					<TypewriterText text={INTRO_TEXT} delay={0.5} />
@@ -58,10 +73,10 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 				transition={{ duration: 0.5, delay: 0.35 }}
 			>
 				<div className="flex flex-wrap justify-center gap-2 max-w-md">
-					{SUGGESTIONS.map((suggestion, i) => (
+					{SUGGESTIONS.map(({ label, question }, i) => (
 						<motion.button
-							key={suggestion}
-							onClick={() => onSuggestionClick(suggestion)}
+							key={label}
+							onClick={() => onSuggestionClick(question)}
 							className="px-4 py-2 text-sm rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
@@ -69,7 +84,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							{suggestion}
+							{label}
 						</motion.button>
 					))}
 				</div>
