@@ -1,12 +1,13 @@
 import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from "ai";
 import { openai } from "@ai-sdk/openai";
 import { z } from "zod";
+import { env } from "@/lib/env";
 
 export async function POST(req: Request) {
 	const { messages }: { messages: UIMessage[] } = await req.json();
 
 	const result = streamText({
-		model: openai("gpt-4.1-mini"),
+		model: openai(env.OPENAI_LARGE_LANGUAGE_MODEL),
 		messages: await convertToModelMessages(messages),
 		stopWhen: stepCountIs(5),
 		tools: {
