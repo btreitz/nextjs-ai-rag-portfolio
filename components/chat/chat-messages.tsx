@@ -19,7 +19,7 @@ interface ChatMessagesProps {
 export function ChatMessages({ messages }: ChatMessagesProps) {
 	return (
 		<motion.div
-			className="flex-1 overflow-hidden pb-24"
+			className="flex-1 overflow-hidden pt-14 pb-36"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5, delay: 0.4 }}

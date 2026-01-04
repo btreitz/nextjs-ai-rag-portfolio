@@ -91,7 +91,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
 					ease: [0.32, 0.72, 0, 1]
 				}}
 			>
-				<div className="py-4">
+				<div className={`${hasStarted ? "pt-4 pb-14" : "py-4"}`}>
 					<form onSubmit={handleSubmit}>
 						<motion.div
 							className="relative p-0.5 rounded-full bg-[linear-gradient(90deg,#8b5cf6,#06b6d4,#ec4899,#f97316,#8b5cf6)] bg-[length:300%_100%] animate-gradient-rotate max-w-xl mx-auto"

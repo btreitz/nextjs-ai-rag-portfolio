@@ -57,6 +57,8 @@ components/
     user-bubble.tsx     # User message bubble styling
 
 lib/
+  config/
+    portfolio.ts        # Owner-specific configuration (see below)
   utils.ts              # cn() helper for class merging
   db/
     index.ts            # Database client (Neon serverless)
@@ -77,6 +79,19 @@ drizzle.config.ts       # Drizzle Kit configuration
 - Tools are defined with Zod schemas via the `tool()` helper
 - Custom tool results render in the frontend via `message.parts` with type discrimination (e.g., `"tool-weather"`)
 - `stepCountIs(n)` controls agentic loop iterations
+
+### Portfolio Configuration
+
+**IMPORTANT:** All owner-specific values must be placed in `lib/config/portfolio.ts`. This is the single source of truth for personalization.
+
+The config includes:
+- `portfolioOwner.name` / `firstName` - Owner's name
+- `portfolioOwner.description` / `introText` - Bio and intro text
+- `portfolioOwner.keywords` - SEO keywords
+- `portfolioOwner.links` - All external links (GitHub, LinkedIn, resume, status page, projects, etc.)
+- `suggestions` - Chat prompt suggestions shown in hero and "/" command
+
+When adding new owner-specific links, URLs, or text, always add them to this config file rather than hardcoding values in components.
 
 ### Environment
 

@@ -24,7 +24,16 @@ export const portfolioOwner = {
 	keywords: ["software developer", "Berlin", "React", "TypeScript", "AI", "full-stack developer"],
 
 	/** OpenGraph locale (e.g., "en_US", "de_DE") */
-	locale: "en_US"
+	locale: "en_US",
+
+	/** Social and external links */
+	links: {
+		github: "https://github.com/btreitz",
+		linkedin: "https://www.linkedin.com/in/btreitz/",
+		resume: "/Bastian_Treitz-Resume.pdf",
+		status: "https://stats.uptimerobot.com/4Z2O7HYX74",
+		projects: "https://projects.trtz.dev/"
+	}
 } as const;
 
 /** Derived values - computed from the base config */
