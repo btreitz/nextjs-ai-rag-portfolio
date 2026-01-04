@@ -5,8 +5,8 @@ import { TypewriterText } from "@/components/ui/typewriter-text";
 import { portfolioOwner } from "@/lib/config/portfolio";
 
 const SUGGESTIONS = [
-	{ label: "Your experience", question: "What's your professional background and work experience?" },
-	{ label: "Your projects", question: "What side projects or personal projects have you built?" },
+	{ label: "Professional experience", question: "What is your professional experience?" },
+	{ label: "Personal projects", question: "What personal projects have you built?" },
 	{ label: "Tech stack", question: "What technologies and tools do you work with?" },
 	{ label: "Current work", question: "What are you currently working on?" },
 	{ label: "Contact info", question: "How can I get in touch with you?" }
