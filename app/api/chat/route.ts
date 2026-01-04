@@ -31,6 +31,10 @@ export async function POST(req: Request) {
 		system: systemPrompt,
 		messages: await convertToModelMessages(messages),
 		stopWhen: stepCountIs(5),
+		experimental_telemetry: {
+			isEnabled: env.LANGFUSE_ENABLED,
+			functionId: "portfolio-chat"
+		},
 		tools: {
 			searchPortfolio: tool({
 				description: `Search ${portfolioOwner.firstName}'s portfolio for information about their experience, projects, skills, education, or background. Use this when you need context to answer questions about ${portfolioOwner.firstName}.`,

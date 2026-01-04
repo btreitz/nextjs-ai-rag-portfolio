@@ -80,10 +80,35 @@ drizzle.config.ts       # Drizzle Kit configuration
 
 ### Environment
 
+**Required:**
+
 - `OPENAI_API_KEY` - OpenAI API key for chat completions
 - `OPENAI_LARGE_LANGUAGE_MODEL` - Model identifier (e.g., `gpt-4o-mini`)
 - `OPENAI_EMBEDDING_MODEL` - Embedding model (e.g., `text-embedding-3-small`)
 - `DATABASE_URL` - Neon PostgreSQL connection string
+
+**Optional (LangFuse Observability):**
+
+- `LANGFUSE_ENABLED` - Set to `true` to enable LangFuse tracing
+- `LANGFUSE_SECRET_KEY` - LangFuse secret key (sk-lf-...)
+- `LANGFUSE_PUBLIC_KEY` - LangFuse public key (pk-lf-...)
+- `LANGFUSE_BASE_URL` - LangFuse host (defaults to `https://cloud.langfuse.com`)
+
+### Observability (LangFuse)
+
+LangFuse integration is optional. When configured, it provides:
+
+- Trace visualization of AI requests
+- Prompt and completion logging
+- Token usage and cost tracking
+
+**Setup:**
+
+1. Create account at [langfuse.com](https://langfuse.com)
+2. Add credentials to `.env.local`
+3. Restart dev server
+
+The integration uses OpenTelemetry via `instrumentation.ts` and only activates when credentials are present.
 
 ### Database
 

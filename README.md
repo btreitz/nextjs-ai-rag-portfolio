@@ -60,6 +60,12 @@ OPENAI_API_KEY=sk-...
 OPENAI_LARGE_LANGUAGE_MODEL=gpt-4o-mini
 OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 DATABASE_URL=postgresql://...  # From Neon dashboard
+
+# Optional: LangFuse observability
+LANGFUSE_ENABLED=true
+LANGFUSE_SECRET_KEY=sk-lf-...
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_BASE_URL=https://cloud.langfuse.com  # or https://us.cloud.langfuse.com
 ```
 
 ### Personalize Your Portfolio
@@ -111,6 +117,17 @@ pnpm db:generate # Generate SQL migration files (production)
 pnpm db:studio   # Open Drizzle Studio web UI to browse data
 pnpm db:index    # Index content files for RAG retrieval
 ```
+
+### Observability (Optional)
+
+LangFuse integration provides prompt tracing, token usage tracking, and cost analytics. It's completely optional and only activates when credentials are configured.
+
+1. Create a free account at [langfuse.com](https://langfuse.com)
+2. Create a new project and copy your API keys
+3. Add keys to `.env.local` (see Installation section)
+4. Restart the dev server
+
+Once configured, all AI requests will appear in your LangFuse dashboard with full trace visibility.
 
 **When to use each:**
 

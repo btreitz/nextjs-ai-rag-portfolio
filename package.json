@@ -16,7 +16,9 @@
 	"dependencies": {
 		"@ai-sdk/openai": "^3.0.2",
 		"@ai-sdk/react": "^3.0.6",
+		"@langfuse/otel": "^4.5.1",
 		"@neondatabase/serverless": "^1.0.2",
+		"@opentelemetry/sdk-node": "^0.208.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/react-syntax-highlighter": "^15.5.13",
 		"ai": "^6.0.6",
