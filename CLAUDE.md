@@ -9,6 +9,12 @@ pnpm dev          # Start development server (http://localhost:3000)
 pnpm build        # Build for production
 pnpm start        # Start production server
 pnpm lint         # Run ESLint
+
+# Database
+pnpm db:setup     # Enable pgvector extension (one-time setup)
+pnpm db:push      # Push schema to database (development)
+pnpm db:generate  # Generate migration files (production)
+pnpm db:studio    # Open Drizzle Studio web UI
 ```
 
 ## Architecture
@@ -18,6 +24,8 @@ pnpm lint         # Run ESLint
 ### Key Dependencies
 
 - **Vercel AI SDK** (`ai`, `@ai-sdk/openai`, `@ai-sdk/react`) - For streaming chat and tool calling
+- **Drizzle ORM** (`drizzle-orm`, `drizzle-kit`) - Type-safe database ORM
+- **Neon** (`@neondatabase/serverless`) - Serverless PostgreSQL with pgvector
 - **Tailwind CSS v4** - Styling via `@tailwindcss/postcss` with typography plugin
 - **Framer Motion** - Animations and transitions
 - **Zod** - Schema validation for AI tools
@@ -48,6 +56,13 @@ components/
 
 lib/
   utils.ts              # cn() helper for class merging
+  db/
+    index.ts            # Database client (Neon serverless)
+    schema.ts           # Drizzle schema with embeddings table
+    env.ts              # Database-specific env validation
+    setup.ts            # Script to enable pgvector extension
+
+drizzle.config.ts       # Drizzle Kit configuration
 ```
 
 ### AI SDK Patterns
@@ -59,7 +74,24 @@ lib/
 
 ### Environment
 
-- Requires `OPENAI_API_KEY` environment variable for the OpenAI provider
+- `OPENAI_API_KEY` - OpenAI API key for chat completions
+- `OPENAI_LARGE_LANGUAGE_MODEL` - Model identifier (e.g., `gpt-4o-mini`)
+- `DATABASE_URL` - Neon PostgreSQL connection string
+
+### Database
+
+Uses Neon (serverless PostgreSQL) with pgvector for vector similarity search.
+
+**Schema** (`lib/db/schema.ts`):
+
+- `embeddings` table with `id`, `content`, and `embedding` (1536-dim vector)
+- HNSW index on embeddings for fast cosine similarity search
+
+**Workflow:**
+
+1. New database: Run `pnpm db:setup` to enable pgvector extension
+2. Schema changes: Use `pnpm db:push` during development
+3. View data: Use `pnpm db:studio` or Neon dashboard
 
 ---
 

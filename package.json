@@ -6,15 +6,21 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "eslint"
+		"lint": "eslint",
+		"db:generate": "drizzle-kit generate",
+		"db:push": "drizzle-kit push",
+		"db:studio": "drizzle-kit studio",
+		"db:setup": "tsx lib/db/setup.ts"
 	},
 	"dependencies": {
 		"@ai-sdk/openai": "^3.0.2",
 		"@ai-sdk/react": "^3.0.6",
+		"@neondatabase/serverless": "^1.0.2",
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/react-syntax-highlighter": "^15.5.13",
 		"ai": "^6.0.6",
 		"clsx": "^2.1.1",
+		"drizzle-orm": "^0.45.1",
 		"framer-motion": "^12.23.26",
 		"lucide-react": "^0.562.0",
 		"next": "16.1.1",
@@ -31,9 +37,12 @@
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"dotenv": "^17.2.3",
+		"drizzle-kit": "^0.31.8",
 		"eslint": "^9",
 		"eslint-config-next": "16.1.1",
 		"tailwindcss": "^4",
+		"tsx": "^4.21.0",
 		"typescript": "^5"
 	}
 }

@@ -28,6 +28,7 @@ The goal is to evolve this into a full RAG (Retrieval-Augmented Generation) syst
 | -------------- | ---------------------------------------- |
 | **Framework**  | Next.js 16 (App Router), React 19        |
 | **AI**         | Vercel AI SDK, OpenAI GPT-4              |
+| **Database**   | Neon (PostgreSQL), Drizzle ORM, pgvector |
 | **Styling**    | Tailwind CSS v4, Framer Motion           |
 | **Language**   | TypeScript                               |
 | **Validation** | Zod                                      |
@@ -65,6 +66,22 @@ pnpm build    # Build for production
 pnpm start    # Start production server
 pnpm lint     # Run ESLint
 ```
+
+### Database Scripts
+
+```bash
+pnpm db:setup    # Enable pgvector extension (run once on new database)
+pnpm db:push     # Push schema changes to database (development)
+pnpm db:generate # Generate SQL migration files (production)
+pnpm db:studio   # Open Drizzle Studio web UI to browse data
+```
+
+**When to use each:**
+
+- `db:setup` — Run once after creating a new Neon database to enable the pgvector extension
+- `db:push` — Use during development to quickly sync schema changes without migrations
+- `db:generate` — Use for production deployments to create versioned migration files
+- `db:studio` — Opens a local web UI at `https://local.drizzle.studio` to view/edit data
 
 ### Key Patterns
 
