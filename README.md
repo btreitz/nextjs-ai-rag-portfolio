@@ -41,6 +41,7 @@ The goal is to evolve this into a full RAG (Retrieval-Augmented Generation) syst
 - Node.js 18+
 - pnpm
 - OpenAI API key
+- Neon database (free tier works)
 
 ### Installation
 
@@ -50,7 +51,24 @@ pnpm install
 
 # Set up environment variables
 cp .env.example .env.local
-# Add your OPENAI_API_KEY to .env.local
+```
+
+Add to `.env.local`:
+
+```
+OPENAI_API_KEY=sk-...
+OPENAI_LARGE_LANGUAGE_MODEL=gpt-4o-mini
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+DATABASE_URL=postgresql://...  # From Neon dashboard
+```
+
+```bash
+# Set up database (one-time)
+pnpm db:setup
+pnpm db:push
+
+# Add your content to data/content/*.md, then:
+pnpm db:index
 
 # Start development server
 pnpm dev
@@ -74,6 +92,7 @@ pnpm db:setup    # Enable pgvector extension (run once on new database)
 pnpm db:push     # Push schema changes to database (development)
 pnpm db:generate # Generate SQL migration files (production)
 pnpm db:studio   # Open Drizzle Studio web UI to browse data
+pnpm db:index    # Index content files for RAG retrieval
 ```
 
 **When to use each:**
@@ -82,6 +101,44 @@ pnpm db:studio   # Open Drizzle Studio web UI to browse data
 - `db:push` — Use during development to quickly sync schema changes without migrations
 - `db:generate` — Use for production deployments to create versioned migration files
 - `db:studio` — Opens a local web UI at `https://local.drizzle.studio` to view/edit data
+- `db:index` — Process markdown files and generate embeddings for RAG (see below)
+
+### Adding Your Content (RAG)
+
+To personalize this portfolio with your own information, add markdown files to the `data/content/` folder:
+
+```
+data/
+  content/
+    resume.md       # Your professional background
+    projects.md     # Project descriptions
+    about.md        # Personal information
+    skills.md       # Technical skills
+    ...             # Any other .md files
+```
+
+**Markdown structure matters!** The indexer splits content by headers and preserves the hierarchy:
+
+```markdown
+# About Me → Creates chunk with heading "About Me"
+
+## Experience → Creates chunk with heading "About Me > Experience"
+
+### Senior Developer at Acme → Creates chunk with heading "About Me > Experience > Senior Developer at Acme"
+```
+
+**After adding/updating content:**
+
+```bash
+pnpm db:index
+```
+
+This will:
+
+1. Clear existing embeddings (full rebuild)
+2. Split each markdown file by headers
+3. Generate embeddings using OpenAI's `text-embedding-3-small`
+4. Store chunks with metadata (source file, title, heading path)
 
 ### Key Patterns
 
@@ -101,7 +158,8 @@ pnpm db:studio   # Open Drizzle Studio web UI to browse data
 
 ## Roadmap
 
-- [ ] **RAG Integration** — Create embeddings and allow additions in Vector DB. Connect to vector database for data retrieval
+- [x] **RAG Data Indexing** — Markdown content indexer with header-based chunking and embeddings
+- [ ] **RAG Retrieval** — Connect vector database to chat for contextual responses
 - [ ] **More Tools** — Display resume and other advanced pieces of data in chat: GitHub stats, project demos, contact form
 - [ ] **Voice Input** — Speech-to-text for real conversation-like experience ([Vercel AI SDK Speech API](https://ai-sdk.dev/docs/ai-sdk-core/speech))
 - [ ] **Multi-model Support** — Switch between AI providers

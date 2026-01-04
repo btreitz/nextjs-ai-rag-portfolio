@@ -15,6 +15,7 @@ pnpm db:setup     # Enable pgvector extension (one-time setup)
 pnpm db:push      # Push schema to database (development)
 pnpm db:generate  # Generate migration files (production)
 pnpm db:studio    # Open Drizzle Studio web UI
+pnpm db:index     # Index markdown content for RAG
 ```
 
 ## Architecture
@@ -24,6 +25,7 @@ pnpm db:studio    # Open Drizzle Studio web UI
 ### Key Dependencies
 
 - **Vercel AI SDK** (`ai`, `@ai-sdk/openai`, `@ai-sdk/react`) - For streaming chat and tool calling
+- **LlamaIndex** (`llamaindex`) - Markdown parsing and chunking for RAG
 - **Drizzle ORM** (`drizzle-orm`, `drizzle-kit`) - Type-safe database ORM
 - **Neon** (`@neondatabase/serverless`) - Serverless PostgreSQL with pgvector
 - **Tailwind CSS v4** - Styling via `@tailwindcss/postcss` with typography plugin
@@ -61,6 +63,10 @@ lib/
     schema.ts           # Drizzle schema with embeddings table
     env.ts              # Database-specific env validation
     setup.ts            # Script to enable pgvector extension
+    index-content.ts    # RAG content indexer script
+
+data/
+  content/              # Markdown files for RAG (*.md)
 
 drizzle.config.ts       # Drizzle Kit configuration
 ```
@@ -76,6 +82,7 @@ drizzle.config.ts       # Drizzle Kit configuration
 
 - `OPENAI_API_KEY` - OpenAI API key for chat completions
 - `OPENAI_LARGE_LANGUAGE_MODEL` - Model identifier (e.g., `gpt-4o-mini`)
+- `OPENAI_EMBEDDING_MODEL` - Embedding model (e.g., `text-embedding-3-small`)
 - `DATABASE_URL` - Neon PostgreSQL connection string
 
 ### Database
@@ -84,7 +91,7 @@ Uses Neon (serverless PostgreSQL) with pgvector for vector similarity search.
 
 **Schema** (`lib/db/schema.ts`):
 
-- `embeddings` table with `id`, `content`, and `embedding` (1536-dim vector)
+- `embeddingsTable` with columns: `id`, `content`, `embedding` (1536-dim), `sourceFile`, `title`, `headingPath`
 - HNSW index on embeddings for fast cosine similarity search
 
 **Workflow:**
@@ -92,6 +99,19 @@ Uses Neon (serverless PostgreSQL) with pgvector for vector similarity search.
 1. New database: Run `pnpm db:setup` to enable pgvector extension
 2. Schema changes: Use `pnpm db:push` during development
 3. View data: Use `pnpm db:studio` or Neon dashboard
+
+### Content Indexing (RAG)
+
+The indexer (`lib/db/index-content.ts`) processes markdown files for RAG:
+
+1. Reads all `*.md` files from `data/content/`
+2. Uses LlamaIndex `MarkdownNodeParser` to split by headers
+3. Generates embeddings via OpenAI `text-embedding-3-small`
+4. Stores chunks with metadata (sourceFile, title, headingPath)
+
+**Run with:** `pnpm db:index`
+
+Each markdown section becomes a separate embedding with its heading hierarchy preserved (e.g., `"About > Experience > Senior Developer"`).
 
 ---
 

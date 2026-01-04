@@ -5,7 +5,9 @@ import { z } from "zod";
 config({ path: ".env.local" });
 
 const dbEnvSchema = z.object({
-	DATABASE_URL: z.string().min(1)
+	DATABASE_URL: z.string().min(1),
+	OPENAI_API_KEY: z.string().min(1),
+	OPENAI_EMBEDDING_MODEL: z.string().min(1)
 });
 
 export const dbEnv = dbEnvSchema.parse(process.env);
