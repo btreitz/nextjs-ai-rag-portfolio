@@ -2,15 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TypewriterText } from "@/components/ui/typewriter-text";
-import { portfolioOwner } from "@/lib/config/portfolio";
-
-const SUGGESTIONS = [
-	{ label: "Professional experience", question: "What is your professional experience?" },
-	{ label: "Personal projects", question: "What personal projects have you built?" },
-	{ label: "Tech stack", question: "What technologies and tools do you work with?" },
-	{ label: "Current work", question: "What are you currently working on?" },
-	{ label: "Contact info", question: "How can I get in touch with you?" }
-];
+import { portfolioOwner, suggestions } from "@/lib/config/portfolio";
 
 interface HeroSectionProps {
 	onSuggestionClick: (suggestion: string) => void;
@@ -71,7 +63,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 				transition={{ duration: 0.5, delay: 0.35 }}
 			>
 				<div className="flex flex-wrap justify-center gap-2 max-w-md">
-					{SUGGESTIONS.map(({ label, question }, i) => (
+					{suggestions.map(({ label, question }, i) => (
 						<motion.button
 							key={label}
 							onClick={() => onSuggestionClick(question)}

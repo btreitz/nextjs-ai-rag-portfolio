@@ -35,6 +35,9 @@ export default function Chat() {
 
 	return (
 		<div className="relative flex flex-col h-screen w-full max-w-2xl mx-auto overflow-hidden">
+			{/* Grid background pattern */}
+			<div className="fixed inset-0 bg-grid-pattern bg-grid-fade pointer-events-none" aria-hidden="true" />
+
 			{/* Hero Content - Title and Suggestions */}
 			<AnimatePresence mode="wait">
 				{!hasStarted && <HeroSection onSuggestionClick={handleSuggestionClick} />}

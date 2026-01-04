@@ -33,5 +33,15 @@ export const siteConfig = {
 	siteName: portfolioOwner.name
 } as const;
 
+/** Chat suggestion prompts - shown in hero and available via "/" command */
+export const suggestions = [
+	{ label: "Professional experience", question: "What is your professional experience?" },
+	{ label: "Personal projects", question: "What personal projects have you built?" },
+	{ label: "Tech stack", question: "What technologies and tools do you work with?" },
+	{ label: "Home lab", question: "What's running in your home lab?" },
+	{ label: "Contact info", question: "How can I get in touch with you?" }
+] as const;
+
 export type PortfolioOwner = typeof portfolioOwner;
 export type SiteConfig = typeof siteConfig;
+export type Suggestion = (typeof suggestions)[number];
