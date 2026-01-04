@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { portfolioOwner, siteConfig } from "@/lib/config/portfolio";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -13,32 +14,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Chat | Bastian Treitz",
-	description:
-		"Software developer based in Berlin. Specializing in React, TypeScript, and building AI-powered applications.",
-	keywords: ["software developer", "Berlin", "React", "TypeScript", "AI", "full-stack developer"],
-	authors: [{ name: "Bastian Treitz" }],
-	creator: "Bastian Treitz",
+	title: siteConfig.title,
+	description: portfolioOwner.description,
+	keywords: portfolioOwner.keywords as unknown as string[],
+	authors: [{ name: portfolioOwner.name }],
+	creator: portfolioOwner.name,
 	openGraph: {
 		type: "website",
-		locale: "en_US",
-		title: "Chat | Bastian Treitz",
-		description:
-			"Software developer based in Berlin. Specializing in React, TypeScript, and building AI-powered applications.",
-		siteName: "Bastian Treitz"
+		locale: portfolioOwner.locale,
+		title: siteConfig.title,
+		description: portfolioOwner.description,
+		siteName: siteConfig.siteName
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Chat | Bastian Treitz",
-		description:
-			"Software developer based in Berlin. Specializing in React, TypeScript, and building AI-powered applications."
+		title: siteConfig.title,
+		description: portfolioOwner.description
 	},
 	robots: {
 		index: true,
 		follow: true
 	},
 	icons: {
-		icon: "/trtz.webp"
+		icon: "/favicon.ico"
 	}
 };
 

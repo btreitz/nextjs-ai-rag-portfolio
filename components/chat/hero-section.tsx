@@ -2,9 +2,7 @@
 
 import { motion } from "framer-motion";
 import { TypewriterText } from "@/components/ui/typewriter-text";
-
-const INTRO_TEXT =
-	"Software developer based in Berlin. Ask me about my experience with React, TypeScript, my home lab, or personal projects.";
+import { portfolioOwner } from "@/lib/config/portfolio";
 
 const SUGGESTIONS = [
 	{ label: "Your experience", question: "What's your professional background and work experience?" },
@@ -45,7 +43,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6, delay: 0.15 }}
 				>
-					Hi, I&apos;m Bastian{" "}
+					Hi, I&apos;m {portfolioOwner.firstName}{" "}
 					<motion.span
 						className="inline-block origin-[70%_70%]"
 						whileHover={{
@@ -57,7 +55,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 					</motion.span>
 				</motion.h1>
 				<p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 max-w-md text-center leading-relaxed">
-					<TypewriterText text={INTRO_TEXT} delay={0.5} />
+					<TypewriterText text={portfolioOwner.introText} delay={0.5} />
 				</p>
 			</motion.div>
 

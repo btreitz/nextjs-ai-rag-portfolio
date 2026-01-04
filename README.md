@@ -62,6 +62,23 @@ OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 DATABASE_URL=postgresql://...  # From Neon dashboard
 ```
 
+### Personalize Your Portfolio
+
+**Important:** Update `lib/config/portfolio.ts` with your own information:
+
+```typescript
+export const portfolioOwner = {
+	name: "Your Full Name", // Used in metadata, system prompts
+	firstName: "YourName", // Used in greetings ("Hi, I'm ...")
+	description: "Your bio...", // SEO & social sharing description
+	introText: "Your intro...", // Hero section typewriter text
+	keywords: ["your", "skills"], // SEO keywords
+	locale: "en_US" // OpenGraph locale
+};
+```
+
+This single file controls all owner-specific text throughout the app—no need to search and replace your name in multiple files.
+
 ```bash
 # Set up database (one-time)
 pnpm db:setup
@@ -159,7 +176,7 @@ This will:
 ## Roadmap
 
 - [x] **RAG Data Indexing** — Markdown content indexer with header-based chunking and embeddings
-- [ ] **RAG Retrieval** — Connect vector database to chat for contextual responses
+- [x] **RAG Retrieval** — Connect vector database to chat for contextual responses
 - [ ] **More Tools** — Display resume and other advanced pieces of data in chat: GitHub stats, project demos, contact form
 - [ ] **Voice Input** — Speech-to-text for real conversation-like experience ([Vercel AI SDK Speech API](https://ai-sdk.dev/docs/ai-sdk-core/speech))
 - [ ] **Multi-model Support** — Switch between AI providers

@@ -3,6 +3,7 @@ import { z } from "zod";
 const envSchema = z.object({
 	OPENAI_API_KEY: z.string().min(1),
 	OPENAI_LARGE_LANGUAGE_MODEL: z.string().min(1),
+	OPENAI_EMBEDDING_MODEL: z.string().min(1),
 	DATABASE_URL: z.string().min(1)
 });
 

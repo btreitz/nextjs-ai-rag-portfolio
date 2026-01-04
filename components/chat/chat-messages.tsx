@@ -55,6 +55,13 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
 																return (
 																	<CodeBlock language={match?.[1]}>{String(children).replace(/\n$/, "")}</CodeBlock>
 																);
+															},
+															a({ href, children }) {
+																return (
+																	<a href={href} target="_blank" rel="noopener noreferrer">
+																		{children}
+																	</a>
+																);
 															}
 														}}
 													>
@@ -62,10 +69,8 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
 													</Markdown>
 												</div>
 											);
-										case "tool-weather":
-											return <ToolOutput key={key} name="weather" data={part} />;
-										case "tool-celsiusToFahrenheit":
-											return <ToolOutput key={key} name="celsiusToFahrenheit" data={part} />;
+										case "tool-searchPortfolio":
+											return <ToolOutput key={key} name="searchPortfolio" data={part} />;
 										default:
 											return null;
 									}
