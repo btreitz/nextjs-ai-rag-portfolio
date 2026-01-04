@@ -50,7 +50,7 @@ export default function Chat() {
 	};
 
 	return (
-		<div className="relative flex flex-col h-screen w-full max-w-2xl mx-auto overflow-hidden">
+		<div className="relative flex flex-col h-screen w-full overflow-hidden">
 			{/* Hero Content - Title and Suggestions */}
 			<AnimatePresence mode="wait">
 				{!hasStarted && <HeroSection onSuggestionClick={handleSuggestionClick} />}

@@ -99,7 +99,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
 							animate={{
 								opacity: 1,
 								scale: 1,
-								maxWidth: hasStarted ? "100%" : "36rem"
+								maxWidth: hasStarted ? "42rem" : "36rem"
 							}}
 							transition={{
 								opacity: { duration: 0.5, delay: 0.2 },

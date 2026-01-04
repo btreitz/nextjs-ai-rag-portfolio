@@ -25,7 +25,7 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
 			transition={{ duration: 0.5, delay: 0.4 }}
 		>
 			<Conversation className="h-full">
-				<ConversationContent>
+				<ConversationContent className="max-w-2xl mx-auto w-full">
 					{messages.map((message) => (
 						<motion.div
 							key={message.id}

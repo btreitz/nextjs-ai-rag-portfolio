@@ -30,7 +30,7 @@ export const portfolioOwner = {
 	links: {
 		github: "https://github.com/btreitz",
 		linkedin: "https://www.linkedin.com/in/btreitz/",
-		resume: "/Bastian_Treitz-Resume.pdf",
+		resume: "https://drive.google.com/file/d/1O4VQaYh5GpHBv2Jz4s4IMW2mB0sbP1nW/view?usp=drive_link",
 		status: "https://stats.uptimerobot.com/4Z2O7HYX74",
 		projects: "https://projects.trtz.dev/"
 	}
