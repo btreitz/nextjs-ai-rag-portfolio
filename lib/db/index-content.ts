@@ -56,12 +56,22 @@ async function indexContent() {
 
 		// Split by markdown headers
 		const nodes = parser.getNodesFromDocuments([doc]);
-		console.log(`  → ${nodes.length} sections`);
 
 		if (nodes.length === 0) continue;
 
-		// Extract text content from each node
-		const chunks = nodes.map((node) => node.getContent(undefined));
+		// Extract text content from each node and filter out title-only chunks
+		const nodesWithContent = nodes.filter((node) => {
+			const content = node.getContent(undefined).trim();
+			return content.includes("\n") || content.length > 100;
+		});
+
+		console.log(
+			`  → ${nodesWithContent.length} sections (${nodes.length - nodesWithContent.length} title-only skipped)`
+		);
+
+		if (nodesWithContent.length === 0) continue;
+
+		const chunks = nodesWithContent.map((node) => node.getContent(undefined));
 
 		// Generate embeddings in batch
 		const { embeddings } = await embedMany({
@@ -70,7 +80,7 @@ async function indexContent() {
 		});
 
 		// Prepare records with metadata from LlamaIndex nodes
-		const records = nodes.map((node, i) => {
+		const records = nodesWithContent.map((node, i) => {
 			// Get header hierarchy from node metadata
 			const metadata = node.metadata || {};
 			const headerKeys = Object.keys(metadata).filter((key) => key.startsWith("Header"));
@@ -92,7 +102,7 @@ async function indexContent() {
 
 		// Insert into database
 		await db.insert(embeddingsTable).values(records);
-		totalChunks += nodes.length;
+		totalChunks += nodesWithContent.length;
 	}
 
 	console.log(`\nIndexing complete!`);
