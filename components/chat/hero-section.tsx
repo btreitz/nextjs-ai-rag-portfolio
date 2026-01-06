@@ -67,11 +67,10 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 						<motion.button
 							key={label}
 							onClick={() => onSuggestionClick(question)}
-							className="px-4 py-2 text-sm rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+							className="px-4 py-2 text-sm rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.3, delay: 0.45 + i * 0.08 }}
-							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
 							{label}

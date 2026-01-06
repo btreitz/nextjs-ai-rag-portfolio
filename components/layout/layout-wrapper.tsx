@@ -5,14 +5,15 @@ import { AnimatePresence } from "framer-motion";
 import { LayoutProvider, useLayout } from "@/lib/context/layout-context";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
+import { InteractiveGridBackground } from "@/components/ui/interactive-grid-background";
 
 function LayoutContent({ children }: { children: ReactNode }) {
 	const { showHeader } = useLayout();
 
 	return (
 		<>
-			{/* Grid background pattern */}
-			<div className="fixed inset-0 bg-grid-pattern bg-grid-fade pointer-events-none" aria-hidden="true" />
+			{/* Interactive grid background pattern */}
+			<InteractiveGridBackground className="bg-grid-fade" />
 
 			{/* Header - conditionally shown */}
 			<AnimatePresence>{showHeader && <Header />}</AnimatePresence>
