@@ -26,12 +26,14 @@ export const metadata: Metadata = {
 		locale: portfolioOwner.locale,
 		title: siteConfig.title,
 		description: portfolioOwner.description,
-		siteName: siteConfig.siteName
+		siteName: siteConfig.siteName,
+		images: ["/chat-og-share.webp"]
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: siteConfig.title,
-		description: portfolioOwner.description
+		description: portfolioOwner.description,
+		images: ["/chat-og-share.webp"]
 	},
 	robots: {
 		index: true,
