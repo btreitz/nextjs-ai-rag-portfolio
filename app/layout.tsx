@@ -27,13 +27,13 @@ export const metadata: Metadata = {
 		title: siteConfig.title,
 		description: portfolioOwner.description,
 		siteName: siteConfig.siteName,
-		images: ["/chat-og-share.webp"]
+		images: ["/chat-og-share.png"]
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: siteConfig.title,
 		description: portfolioOwner.description,
-		images: ["/chat-og-share.webp"]
+		images: ["/chat-og-share.png"]
 	},
 	robots: {
 		index: true,
