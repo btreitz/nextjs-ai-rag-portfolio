@@ -1,15 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { portfolioOwner } from "@/lib/config/portfolio";
 import { useLayout } from "@/lib/context/layout-context";
 
 /**
- * Glass-like curved header with logo, resume link, and social links.
+ * Glass-like curved header with logo, title, resume link, and social links.
+ * Responsive: shows burger menu on mobile, full nav on md+.
  */
 export function Header() {
 	const { onLogoClick } = useLayout();
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const handleLogoClick = () => {
 		if (onLogoClick) {
@@ -19,14 +22,17 @@ export function Header() {
 
 	return (
 		<motion.header
-			className="fixed top-0 left-1/2 -translate-x-1/2 z-20 w-full max-w-4xl px-4"
+			className="fixed top-0 left-0 right-0 mx-auto z-20 w-full max-w-4xl px-4"
 			initial={{ opacity: 0, y: -20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5, delay: 0.3 }}
 		>
-			<div className="flex items-center justify-between px-5 py-2.5 rounded-b-2xl bg-zinc-100/70 dark:bg-zinc-900/70 backdrop-blur-md border border-t-0 border-zinc-200/50 dark:border-zinc-800/50">
-				{/* Logo */}
-				<button onClick={handleLogoClick} className="flex items-center cursor-pointer">
+			<div
+				className="flex items-center justify-between px-5 py-2.5 rounded-b-2xl bg-zinc-900/70 backdrop-blur-md border border-t-0 border-zinc-800/50"
+				style={{ fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace' }}
+			>
+				{/* Logo and Title */}
+				<button onClick={handleLogoClick} className="flex items-center gap-3 cursor-pointer">
 					<Image
 						src="/logo.webp"
 						alt="logo"
@@ -34,15 +40,16 @@ export function Header() {
 						height={32}
 						className="rounded-lg transition-all hover:scale-105"
 					/>
+					<span className="text-sm text-zinc-200">Chat - trtz.dev</span>
 				</button>
 
-				{/* Resume and Social links */}
-				<div className="flex items-center gap-5">
+				{/* Desktop Navigation - hidden on mobile */}
+				<div className="hidden md:flex items-center gap-5">
 					<a
 						href={portfolioOwner.links.resume}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+						className="flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
 					>
 						<FileTextIcon className="size-4" />
 						<span>Resume</span>
@@ -52,7 +59,7 @@ export function Header() {
 						href={portfolioOwner.links.projects}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+						className="flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
 					>
 						<ExternalLinkIcon className="size-4" />
 						<span>Projects</span>
@@ -63,7 +70,7 @@ export function Header() {
 							href={portfolioOwner.links.github}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+							className="text-zinc-500 hover:text-zinc-100 transition-colors"
 							aria-label="GitHub"
 						>
 							<GitHubIcon className="size-5" />
@@ -72,14 +79,84 @@ export function Header() {
 							href={portfolioOwner.links.linkedin}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+							className="text-zinc-500 hover:text-zinc-100 transition-colors"
 							aria-label="LinkedIn"
 						>
 							<LinkedInIcon className="size-5" />
 						</a>
 					</div>
 				</div>
+
+				{/* Mobile Menu Button - visible only on mobile */}
+				<button
+					onClick={() => setIsMenuOpen(!isMenuOpen)}
+					className="md:hidden p-2 -mr-2 text-zinc-400 hover:text-zinc-200 transition-colors"
+					aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+				>
+					{isMenuOpen ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
+				</button>
 			</div>
+
+			{/* Mobile Menu Dropdown */}
+			<AnimatePresence>
+				{isMenuOpen && (
+					<motion.div
+						initial={{ opacity: 0, y: -10 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -10 }}
+						transition={{ duration: 0.2 }}
+						className="md:hidden mt-2 mx-0 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-zinc-800/50 overflow-hidden"
+						style={{ fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace' }}
+					>
+						<div className="flex flex-col p-4 gap-4">
+							<a
+								href={portfolioOwner.links.resume}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex items-center gap-3 text-sm text-zinc-400 hover:text-zinc-200 transition-colors py-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								<FileTextIcon className="size-5" />
+								<span>Resume</span>
+							</a>
+
+							<a
+								href={portfolioOwner.links.projects}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex items-center gap-3 text-sm text-zinc-400 hover:text-zinc-200 transition-colors py-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								<ExternalLinkIcon className="size-5" />
+								<span>Projects</span>
+							</a>
+
+							<div className="border-t border-zinc-800/50 pt-4 flex items-center gap-6">
+								<a
+									href={portfolioOwner.links.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center gap-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+									onClick={() => setIsMenuOpen(false)}
+								>
+									<GitHubIcon className="size-5" />
+									<span className="text-sm">GitHub</span>
+								</a>
+								<a
+									href={portfolioOwner.links.linkedin}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center gap-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+									onClick={() => setIsMenuOpen(false)}
+								>
+									<LinkedInIcon className="size-5" />
+									<span className="text-sm">LinkedIn</span>
+								</a>
+							</div>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</motion.header>
 	);
 }
@@ -134,6 +211,41 @@ function LinkedInIcon({ className }: { className?: string }) {
 	return (
 		<svg className={className} viewBox="0 0 24 24" fill="currentColor">
 			<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+		</svg>
+	);
+}
+
+function MenuIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			className={className}
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<line x1="4" y1="6" x2="20" y2="6" />
+			<line x1="4" y1="12" x2="20" y2="12" />
+			<line x1="4" y1="18" x2="20" y2="18" />
+		</svg>
+	);
+}
+
+function CloseIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			className={className}
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<line x1="18" y1="6" x2="6" y2="18" />
+			<line x1="6" y1="6" x2="18" y2="18" />
 		</svg>
 	);
 }

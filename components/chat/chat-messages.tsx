@@ -40,7 +40,7 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
 									switch (part.type) {
 										case "text":
 											return (
-												<div key={key} className="prose prose-base dark:prose-invert max-w-none">
+												<div key={key} className="prose prose-base prose-invert max-w-none">
 													<Markdown
 														components={{
 															pre({ children }) {

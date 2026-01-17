@@ -1,22 +1,20 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { AnimatePresence } from "framer-motion";
-import { LayoutProvider, useLayout } from "@/lib/context/layout-context";
+import { LayoutProvider } from "@/lib/context/layout-context";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { InteractiveGridBackground } from "@/components/ui/interactive-grid-background";
 
 function LayoutContent({ children }: { children: ReactNode }) {
-	const { showHeader } = useLayout();
 
 	return (
 		<>
 			{/* Interactive grid background pattern */}
 			<InteractiveGridBackground className="bg-grid-fade" />
 
-			{/* Header - conditionally shown */}
-			<AnimatePresence>{showHeader && <Header />}</AnimatePresence>
+			{/* Header - always visible */}
+			<Header />
 
 			{/* Page content */}
 			{children}

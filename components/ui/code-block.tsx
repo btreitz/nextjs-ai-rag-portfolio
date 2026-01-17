@@ -62,7 +62,7 @@ interface InlineCodeProps {
 
 export function InlineCode({ children }: InlineCodeProps) {
 	return (
-		<code className="px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-sm font-mono">
+		<code className="px-1.5 py-0.5 rounded bg-zinc-800 text-sm font-mono">
 			{children}
 		</code>
 	);

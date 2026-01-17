@@ -111,14 +111,14 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
 							<AnimatePresence>
 								{showSuggestions && (
 									<motion.div
-										className="absolute bottom-full left-0 right-0 mb-2 bg-background border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-lg overflow-hidden"
+										className="absolute bottom-full left-0 right-0 mb-2 bg-background border border-zinc-800 rounded-xl shadow-lg overflow-hidden"
 										initial={{ opacity: 0, y: 10, scale: 0.95 }}
 										animate={{ opacity: 1, y: 0, scale: 1 }}
 										exit={{ opacity: 0, y: 10, scale: 0.95 }}
 										transition={{ duration: 0.15 }}
 									>
 										<div className="p-2">
-											<p className="px-3 py-1.5 text-xs text-zinc-400 dark:text-zinc-500">
+											<p className="px-3 py-1.5 text-xs text-zinc-500">
 												Quick prompts — Tab to navigate, Enter to select
 											</p>
 											{suggestions.map(({ label, question }, i) => (
@@ -127,14 +127,14 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
 													type="button"
 													className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
 														i === selectedIndex
-															? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-															: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+															? "bg-zinc-800 text-zinc-100"
+															: "text-zinc-400 hover:bg-zinc-800/50"
 													}`}
 													onClick={() => selectSuggestion(question)}
 													onMouseEnter={() => setSelectedIndex(i)}
 												>
 													<span className="font-medium">{label}</span>
-													<span className="ml-2 text-sm text-zinc-400 dark:text-zinc-500">{question}</span>
+													<span className="ml-2 text-sm text-zinc-500">{question}</span>
 												</button>
 											))}
 										</div>
@@ -169,7 +169,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
 								/>
 								<motion.button
 									type="submit"
-									className="p-3 mr-1 rounded-xl text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:cursor-pointer transition-colors"
+									className="p-3 mr-1 rounded-xl text-zinc-400 hover:text-zinc-100 hover:cursor-pointer transition-colors"
 									aria-label="Send message"
 									whileHover={{ scale: 1.1 }}
 									whileTap={{ scale: 0.9 }}

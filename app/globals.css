@@ -2,19 +2,12 @@
 @plugin "@tailwindcss/typography";
 
 /* =============================================================================
-   CSS Variables & Theme
+   CSS Variables & Theme (Dark Mode Only)
    ============================================================================= */
 
 :root {
-	--background: #fafafa;
-	--foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #09090b;
-		--foreground: #fafafa;
-	}
+	--background: #09090b;
+	--foreground: #fafafa;
 }
 
 @theme inline {
@@ -32,20 +25,13 @@ body {
 }
 
 /* =============================================================================
-   Grid Background Pattern
-   Subtle coordinate/mesh pattern for hero sections. Works in both light/dark.
+   Grid Background Pattern (Dark Mode Only)
    ============================================================================= */
 
 .bg-grid-pattern {
-	background-image: radial-gradient(rgb(0 0 0 / 0.15) 1px, transparent 1px);
+	background-image: radial-gradient(rgb(255 255 255 / 0.15) 1px, transparent 1px);
 	background-size: 24px 24px;
 	background-position: -1px -1px;
-}
-
-@media (prefers-color-scheme: dark) {
-	.bg-grid-pattern {
-		background-image: radial-gradient(rgb(255 255 255 / 0.15) 1px, transparent 1px);
-	}
 }
 
 /* Fade out the grid at the edges for a softer look */

@@ -13,11 +13,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				className={cn(
 					"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 disabled:pointer-events-none disabled:opacity-50",
 					{
-						"bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200":
-							variant === "default",
-						"border border-zinc-200 bg-white shadow-sm hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800":
-							variant === "outline",
-						"hover:bg-zinc-100 dark:hover:bg-zinc-800": variant === "ghost"
+						"bg-zinc-50 text-zinc-900 shadow hover:bg-zinc-200": variant === "default",
+						"border border-zinc-800 bg-zinc-950 shadow-sm hover:bg-zinc-800": variant === "outline",
+						"hover:bg-zinc-800": variant === "ghost"
 					},
 					{
 						"h-9 px-4 py-2": size === "default",

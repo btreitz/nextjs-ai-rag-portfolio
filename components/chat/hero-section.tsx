@@ -30,7 +30,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 				transition={{ duration: 0.6, delay: 0.1 }}
 			>
 				<motion.h1
-					className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 text-center"
+					className="text-4xl font-semibold tracking-tight text-zinc-100 text-center"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6, delay: 0.15 }}
@@ -46,7 +46,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 						👋
 					</motion.span>
 				</motion.h1>
-				<p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 max-w-md text-center leading-relaxed">
+				<p className="mt-6 text-base text-zinc-400 max-w-md text-center leading-relaxed">
 					<TypewriterText text={portfolioOwner.introText} delay={0.5} />
 				</p>
 			</motion.div>
@@ -67,7 +67,7 @@ export function HeroSection({ onSuggestionClick }: HeroSectionProps) {
 						<motion.button
 							key={label}
 							onClick={() => onSuggestionClick(question)}
-							className="px-4 py-2 text-sm rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+							className="px-4 py-2 text-sm rounded-full border border-zinc-800 bg-black text-zinc-400 hover:border-zinc-700 hover:text-zinc-200 transition-colors"
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.3, delay: 0.45 + i * 0.08 }}

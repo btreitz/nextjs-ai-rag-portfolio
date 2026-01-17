@@ -14,13 +14,13 @@ export function Footer() {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5, delay: 0.3 }}
 		>
-			<div className="flex items-center justify-between px-5 py-2.5 rounded-t-2xl bg-zinc-100/70 dark:bg-zinc-900/70 backdrop-blur-md border border-b-0 border-zinc-200/50 dark:border-zinc-800/50">
+			<div className="flex items-center justify-between px-5 py-2.5 rounded-t-2xl bg-zinc-900/70 backdrop-blur-md border border-b-0 border-zinc-800/50">
 				{/* Status indicator */}
 				<a
 					href={portfolioOwner.links.status}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+					className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
 				>
 					<span className="relative flex h-2 w-2">
 						<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -35,7 +35,7 @@ export function Footer() {
 						href={portfolioOwner.links.github}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+						className="text-zinc-500 hover:text-zinc-100 transition-colors"
 						aria-label="GitHub"
 					>
 						<GitHubIcon className="size-5" />
@@ -44,7 +44,7 @@ export function Footer() {
 						href={portfolioOwner.links.linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+						className="text-zinc-500 hover:text-zinc-100 transition-colors"
 						aria-label="LinkedIn"
 					>
 						<LinkedInIcon className="size-5" />

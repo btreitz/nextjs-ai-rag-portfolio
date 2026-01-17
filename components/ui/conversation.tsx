@@ -45,10 +45,10 @@ export const ConversationEmptyState = ({
 	>
 		{children ?? (
 			<>
-				{icon && <div className="text-zinc-400 dark:text-zinc-500">{icon}</div>}
+				{icon && <div className="text-zinc-500">{icon}</div>}
 				<div className="space-y-1">
-					<h3 className="font-medium text-lg text-zinc-900 dark:text-zinc-100">{title}</h3>
-					{description && <p className="text-zinc-500 dark:text-zinc-400 text-sm">{description}</p>}
+					<h3 className="font-medium text-lg text-zinc-100">{title}</h3>
+					{description && <p className="text-zinc-400 text-sm">{description}</p>}
 				</div>
 			</>
 		)}
