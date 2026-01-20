@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { portfolioOwner, siteConfig } from "@/lib/config/portfolio";
 import { LayoutWrapper } from "@/components/layout/layout-wrapper";
-import { Analytics } from "@vercel/analytics/next";
+import { AnalyticsProvider } from "@/components/analytics-provider";
+import { CookieConsentWrapper } from "@/components/cookie-consent-wrapper";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -53,7 +54,8 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#09090b] text-zinc-50`}>
 				<LayoutWrapper>{children}</LayoutWrapper>
-				<Analytics />
+				<AnalyticsProvider />
+				<CookieConsentWrapper />
 			</body>
 		</html>
 	);

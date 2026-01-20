@@ -51,6 +51,43 @@ export const suggestions = [
 	{ label: "Contact info", question: "How can I get in touch with you?" }
 ] as const;
 
+/** Privacy policy content for GDPR compliance */
+export const privacyPolicy = {
+	title: "Privacy Policy",
+	lastUpdated: "January 2026",
+	sections: [
+		{
+			title: "Analytics (Requires Consent)",
+			content:
+				"We use Vercel Analytics to understand how visitors interact with this site. This service collects anonymized data about page views, device type, and general location. This data is only collected if you accept cookies."
+		},
+		{
+			title: "Chat Processing (Legitimate Interest)",
+			content:
+				"When you use the chat feature, your messages are processed by OpenAI to generate responses. We also use LangFuse to monitor chat quality and prevent abuse. This processing is necessary for the service to function and to protect against misuse (Art. 6(1)(f) GDPR - Legitimate Interest)."
+		},
+		{
+			title: "Data Storage",
+			content:
+				"Chat messages are not permanently stored on our servers. They are processed in real-time and may be temporarily logged for quality monitoring purposes."
+		},
+		{
+			title: "Your Rights",
+			content:
+				"Under GDPR, you have the right to access, rectify, or delete your personal data. You can also object to processing based on legitimate interest. For any privacy-related requests, please contact me via LinkedIn."
+		},
+		{
+			title: "Third-Party Services",
+			items: [
+				"OpenAI - Chat message processing (US-based, Standard Contractual Clauses)",
+				"LangFuse - Quality monitoring (EU-based)",
+				"Vercel Analytics - Site analytics (US-based, only with consent)"
+			]
+		}
+	]
+} as const;
+
 export type PortfolioOwner = typeof portfolioOwner;
 export type SiteConfig = typeof siteConfig;
 export type Suggestion = (typeof suggestions)[number];
+export type PrivacyPolicy = typeof privacyPolicy;
