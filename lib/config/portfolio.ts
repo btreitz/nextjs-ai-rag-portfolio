@@ -38,7 +38,7 @@ export const portfolioOwner = {
 
 /** Derived values - computed from the base config */
 export const siteConfig = {
-	title: `Chat | ${portfolioOwner.name}`,
+	title: `Chat > TEST | ${portfolioOwner.name}`,
 	siteName: portfolioOwner.name
 } as const;
 
